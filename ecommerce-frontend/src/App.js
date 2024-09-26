@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AuthForm from "./components/AuthForm";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
@@ -12,17 +12,13 @@ const App = () => {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/login">
-          <AuthForm isLogin={true} onAuthSuccess={handleAuthSuccess} />
-        </Route>
-        <Route path="/register">
-          <AuthForm isLogin={false} onAuthSuccess={handleAuthSuccess} />
-        </Route>
-        <Route path="/products/:id" component={ProductDetail} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/" component={ProductList} />
-      </Switch>
+      <Routes>
+        <Route path="/login" element={<AuthForm isLogin={true} onAuthSuccess={handleAuthSuccess} />} />
+        <Route path="/register" element={<AuthForm isLogin={false} onAuthSuccess={handleAuthSuccess} />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<ProductList />} />
+      </Routes>
     </Router>
   );
 };
